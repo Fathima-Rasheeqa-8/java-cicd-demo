@@ -61,8 +61,9 @@ pipeline {
         stage('Sanity Check') {
             steps {
                 bat '''
-                timeout /t 20
-                curl -f http://localhost:30080/hello
+                start /B kubectl port-forward svc/java-cicd-demo-service 9090:8080
+                ping 127.0.0.1 -n 6 > nul
+                curl -f http://localhost:9090/hello
                 '''
             }
         }
