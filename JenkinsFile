@@ -63,7 +63,7 @@ pipeline {
                 bat '''
                 start /B kubectl port-forward svc/java-cicd-demo-service 9090:8080
                 ping 127.0.0.1 -n 6 > nul
-                curl -f http://localhost:9090/wrong-url
+                curl -f http://localhost:9090/hello
                 '''
             }
         }
