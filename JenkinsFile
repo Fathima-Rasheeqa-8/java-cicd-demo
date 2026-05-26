@@ -60,13 +60,10 @@ pipeline {
         }
         stage('Sanity Check') {
             steps {
-
                 bat '''
                 timeout /t 20
-
-                curl -f http://localhost:9090/hello
+                curl -f http://localhost:30080/hello
                 '''
-
             }
         }
     }
