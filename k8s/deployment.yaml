@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-cicd-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java-cicd-demo
+  template:
+    metadata:
+      labels:
+        app: java-cicd-demo
+    spec:
+      containers:
+        - name: java-cicd-demo
+          image: docker.io/your-username/java-cicd-demo:1.0
+          ports:
+            - containerPort: 8080
