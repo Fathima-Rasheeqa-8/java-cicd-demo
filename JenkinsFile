@@ -43,13 +43,20 @@ pipeline {
                 }
             }
         }
+        stage('Check Kubernetes in Jenkins') {
+            steps {
+                bat 'kubectl version --client'
+                bat 'kubectl config current-context'
+                bat 'kubectl get nodes'
+            }
+        }
         stage('Deploy to Kubernetes') {
             steps {
-                bat '''
-                kubectl apply -f k8s\\deployment.yaml
-                kubectl apply -f k8s\\service.yaml
-                '''
-            }
+                   bat 'kubectl config current-context'
+                    bat 'kubectl get nodes'
+                    bat 'kubectl apply -f k8s\\deployment.yaml'
+                    bat 'kubectl apply -f k8s\\service.yaml'
+                }
         }
     }
 }
