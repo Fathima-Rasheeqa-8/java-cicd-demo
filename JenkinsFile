@@ -29,23 +29,16 @@ pipeline {
         }
 
         stage('Push Image') {
-
             steps {
-
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'docker-registry-credentials',
-                        usernameVariable: 'DOCKER_USER',
-                        passwordVariable: 'DOCKER_PASS'
-                    )
-                ]) {
-
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-registry-credentials',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
                     bat '''
-                    echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-
-                    docker tag %IMAGE_NAME%:%IMAGE_TAG% %REGISTRY%/%IMAGE_NAME%:%IMAGE_TAG%
-
-                    docker push %REGISTRY%/%IMAGE_NAME%:%IMAGE_TAG%
+                        docker login -u %DOCKER_USER% -p %DOCKER_PASS%
+                        docker tag java-cicd-demo:1.0 docker.io/fathimarasheeqa/java-cicd-demo:1.0
+                        docker push docker.io/fathimarasheeqa/java-cicd-demo:1.0
                     '''
                 }
             }
