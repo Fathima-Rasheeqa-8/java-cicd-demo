@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: java-cicd-demo
-          image: docker.io/your-username/java-cicd-demo:1.0
+          image: docker.io/fathimarasheeqa/java-cicd-demo:1.0
           ports:
             - containerPort: 8080
