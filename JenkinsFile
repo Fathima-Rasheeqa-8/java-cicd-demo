@@ -70,4 +70,17 @@ pipeline {
             }
         }
     }
+    post {
+
+        failure {
+
+            echo 'Rollback started'
+
+            bat '''
+                kubectl rollout undo deployment/java-cicd-demo
+                kubectl rollout status deployment/java-cicd-demo
+            '''
+        }
+
+    }
 }
